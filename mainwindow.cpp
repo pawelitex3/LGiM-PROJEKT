@@ -52,6 +52,26 @@ void MainWindow::czarneTlo(QImage &obrazek)
             ptr[4*szerokosc*i + 4*j + 2] = 0;
         }
     }
+
+    for(int s=0; s<500; s++){
+        int i = qrand()%(wysokosc-10);
+        int j = qrand()%(szerokosc-10);
+        if(s%10==0){
+            for(int t=0; t<4; t++){
+                for(int p=0; p<4; p++){
+                    ptr[4*szerokosc*(i+t) + 4*(j+p)] = 255;
+                    ptr[4*szerokosc*(i+t) + 4*(j+p) + 1] = 255;
+                    ptr[4*szerokosc*(i+t) + 4*(j+p) + 2] = 255;
+                }
+            }
+        }
+        else{
+            ptr[4*szerokosc*i + 4*j] = 255;
+            ptr[4*szerokosc*i + 4*j + 1] = 255;
+            ptr[4*szerokosc*i + 4*j + 2] = 255;
+        }
+    }
+
 }
 
 void MainWindow::symulujRuch()
@@ -73,42 +93,50 @@ void MainWindow::symulujRuch()
                 obracanieOY(0.1*j, i);
                 przesuwanie(220, 0, 0, i);
                 obracanieOY(10*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==2){
                 obracanieOY(0.02*j, i);
                 przesuwanie(259, 0, 0, i);
                 obracanieOY(5*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==3){
                 obracanieOY(5*j, i);
                 obracanieOZ(2*j, i);
                 przesuwanie(308, 0, 0, i);
                 obracanieOY(3*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==4){
                 obracanieOY(5*j, i);
                 przesuwanie(351, 0, 0, i);
                 obracanieOY(1.5*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==5){
                 obracanieOY(2*j, i);
                 przesuwanie(429, 0, 0, i);
                 obracanieOY(0.2*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==6){
                 obracanieOY(2*j, i);
                 przesuwanie(539, 0, 0, i);
                 obracanieOY(0.1*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==7){
                 obracanieOY(3.5*j, i);
                 przesuwanie(629, 0, 0, i);
                 obracanieOY(0.05*j, i);
+                obracanieOX(0.005*j, i);
             }
             else if(i==8){
                 obracanieOY(3*j, i);
                 przesuwanie(709, 0, 0, i);
                 obracanieOY(0.025*j, i);
+                obracanieOX(0.005*j, i);
             }
 
 

@@ -61,42 +61,63 @@ void MainWindow::symulujRuch()
     while(1){
         czarneTlo(obrazek);
         przeksztalcenia.clear();
-
+        przeksztalconeWierzcholkiPlanet3D.clear();
         for(int i=0; i<9; i++){
             ustawJednostkowa();
-
+            obracanieOX(90, i);
             if(i==0){
-                obracanieOY(2, i);
-                obracanieOZ(1, i);
+                obracanieOY(2*j, i);
+                obracanieOZ(1*j, i);
             }
             else if (i == 1){
-                obracanieOY(10, i);
+                obracanieOY(0.1*j, i);
+                przesuwanie(220, 0, 0, i);
+                obracanieOY(10*j, i);
             }
             else if(i==2){
-                obracanieOY(5, i);
+                obracanieOY(0.02*j, i);
+                przesuwanie(259, 0, 0, i);
+                obracanieOY(5*j, i);
             }
             else if(i==3){
-                obracanieOY(3, i);
+                obracanieOY(5*j, i);
+                obracanieOZ(2*j, i);
+                przesuwanie(308, 0, 0, i);
+                obracanieOY(3*j, i);
             }
             else if(i==4){
-                obracanieOY(1.5, i);
+                obracanieOY(5*j, i);
+                przesuwanie(351, 0, 0, i);
+                obracanieOY(1.5*j, i);
             }
             else if(i==5){
-                obracanieOY(0.2, i);
+                obracanieOY(2*j, i);
+                przesuwanie(429, 0, 0, i);
+                obracanieOY(0.2*j, i);
             }
             else if(i==6){
-                obracanieOY(0.1, i);
+                obracanieOY(2*j, i);
+                przesuwanie(539, 0, 0, i);
+                obracanieOY(0.1*j, i);
             }
             else if(i==7){
-                obracanieOY(0.05, i);
+                obracanieOY(3.5*j, i);
+                przesuwanie(629, 0, 0, i);
+                obracanieOY(0.05*j, i);
             }
             else if(i==8){
-                obracanieOY(0.025, i);
+                obracanieOY(3*j, i);
+                przesuwanie(709, 0, 0, i);
+                obracanieOY(0.025*j, i);
             }
 
+
+
+
+            //j%=360;
             //obracanieOY(3, i);
         }
-
+        j++;
         //obracanieOY(3, 0);
         wierzcholkiPlanet2D.clear();
         rzutujNa2D();
@@ -294,7 +315,8 @@ void MainWindow::rzutujNa2D()
             przeksztalconeWierzcholki.push_back(w);
         }
 
-        wierzcholkiPlanet3D[j] = przeksztalconeWierzcholki;
+        przeksztalconeWierzcholkiPlanet3D.push_back(przeksztalconeWierzcholki);
+        //wierzcholkiPlanet3D[j] = przeksztalconeWierzcholki;
 
         for(int i=0; i<wierzcholkiKuli.size(); i++){
 
@@ -572,7 +594,7 @@ void MainWindow::teksturuj()
 {
     QVector <Wierzcholek> pary;
     for(int i=0; i<tekstury.size(); i++){
-        pary.push_back(Wierzcholek(wierzcholkiPlanet3D[i][0].z, i, 0));
+        pary.push_back(Wierzcholek(przeksztalconeWierzcholkiPlanet3D[i][0].z, i, 0));
     }
 
     for(int i=0; i<pary.size(); i++){
@@ -587,7 +609,7 @@ void MainWindow::teksturuj()
             double minX, minY, maxX, maxY;
             Trojkat t(trojkatyPlanet[i][j]);
             Wierzcholek p0(wierzcholkiPlanet2D[i][t.wierzcholki[0]]), p1(wierzcholkiPlanet2D[i][t.wierzcholki[1]]), p2(wierzcholkiPlanet2D[i][t.wierzcholki[2]]);
-            Wierzcholek p3d0(wierzcholkiPlanet3D[i][t.wierzcholki[0]]), p3d1(wierzcholkiPlanet3D[i][t.wierzcholki[1]]), p3d2(wierzcholkiPlanet3D[i][t.wierzcholki[2]]);
+            Wierzcholek p3d0(przeksztalconeWierzcholkiPlanet3D[i][t.wierzcholki[0]]), p3d1(przeksztalconeWierzcholkiPlanet3D[i][t.wierzcholki[1]]), p3d2(przeksztalconeWierzcholkiPlanet3D[i][t.wierzcholki[2]]);
             Wierzcholek pt0(wierzcholkiTekstury[i][t.wierzcholki[0]]), pt1(wierzcholkiTekstury[i][t.wierzcholki[1]]), pt2(wierzcholkiTekstury[i][t.wierzcholki[2]]);
 
             minX = std::min(p0.x, std::min(p1.x, p2.x));
@@ -612,15 +634,24 @@ void MainWindow::teksturuj()
                 N.z/=dlugosc;
 
                 Wierzcholek S;
-
+                S.x = (p3d1.x+p3d2.x+p3d0.x)/3;
+                S.y = (p3d1.y+p3d2.y+p3d0.y)/3;
+                S.z = (p3d1.z+p3d2.z+p3d0.z)/3;
+                /*
                 if(i==1){
-                    S.x = 220;
+                    //S.x = 308;
+                    //S.x = (p3d1.x+p3d2.x+p3d0.x)/3-220;
+                    //S.y = (p3d1.y+p3d2.y+p3d0.y)/3-220;
+                    //S.z = (p3d1.z+p3d2.z+p3d0.z)/3-220;
+
+
                 }
                 else if(i==2){
                     S.x = 259;
                 }
                 else if(i==3){
                     S.x = 308;
+
                 }
                 else if(i==4){
                     S.x = 351;
@@ -637,7 +668,7 @@ void MainWindow::teksturuj()
                 else if(i==8){
                     S.x = 709;
                 }
-
+*/
                 //Wierzcholek S(szerokosc/2, 0, 0);
                 dlugosc = sqrt(S.x*S.x + S.y*S.y + S.z*S.z);
                 S.x/=dlugosc;
@@ -645,7 +676,7 @@ void MainWindow::teksturuj()
                 S.z/=dlugosc;
 
                 double iloczyn = N.x*S.x + N.y*S.y + N.z*S.z;
-                ui->label->setNum(p1.x-p0.x);
+                ui->label->setNum(p1.z);
                 ui->label_4->setNum(p2.x-p0.x);
                 ui->label_2->setNum(p1.y-p0.y);
                 ui->label_3->setNum(p2.y-p0.y);

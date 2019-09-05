@@ -65,6 +65,7 @@ private:
     QVector <QGenericMatrix<4, 4, double> > przeksztalcenia;
     QVector <QVector <Wierzcholek> > wierzcholkiPlanet2D;
     QVector <QVector <Wierzcholek> > wierzcholkiPlanet3D;
+    QVector <QVector <Wierzcholek> > przeksztalconeWierzcholkiPlanet3D;
     QVector <QVector <Wierzcholek> > wierzcholkiTekstury;
     QVector <QVector <Trojkat> > trojkatyPlanet;
     QVector <QImage> tekstury;

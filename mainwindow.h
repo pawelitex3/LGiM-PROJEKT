@@ -6,10 +6,12 @@
 #include <QColor>
 #include <QRgb>
 #include <QTime>
+#include <QFutureSynchronizer>
 #include <windows.h>
 #include <QGenericMatrix>
 #include <cmath>
 #include <algorithm>
+#include <QtConcurrent/QtConcurrent>
 #include "wierzcholek.h"
 #include "trojkat.h"
 
@@ -25,7 +27,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     void paintEvent(QPaintEvent*);
-    void czarneTlo(QImage & obrazek);
+    void czarneTlo(QImage & obrazek, bool noweTlo);
 
     void rysujOdcinek(int x0, int y0, int x1, int y1);
     void zapalPiksel(int x, int y);
@@ -38,6 +40,7 @@ public:
     void teksturuj();
     void ustawJednostkowa();
     void przeksztalc();
+    void przeksztalcPlanete(int i, int j);
 
     void symulujRuch();
 
@@ -56,7 +59,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QImage obrazek;
+    QImage obrazek, tlo;
 
     //QVector <Wierzcholek> wierzcholkiKuli;
     //QVector <Trojkat> trojkatyKuli;

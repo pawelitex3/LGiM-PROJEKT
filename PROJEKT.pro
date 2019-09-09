@@ -28,7 +28,13 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     trojkat.cpp \
-    wierzcholek.cpp
+    wierzcholek.cpp \
+    rzutowanie.cpp \
+    przeksztalcenia.cpp \
+    teksturowanie.cpp \
+    rysowanie.cpp \
+    wyznaczaniefigur.cpp \
+    symulacjaruchu.cpp
 
 HEADERS += \
         mainwindow.h \
